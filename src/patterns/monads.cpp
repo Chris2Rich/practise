@@ -10,11 +10,13 @@ private:
             vals[1] = inpb;
             vals[2] = inpc;
             vals[3] = inpd;
+        }
             
         float operator[](int i){
             return (i < 4) ? vals[i] : 0;
-            }
         }
+        
+        
     };
 public:
 
@@ -28,15 +30,17 @@ public:
     }
 };
 
-class Map{
+class List{
     template <typename T>
-    Map(T inp){
-        return Map<inp>;
+    T Array[];
+    template <typename T>
+    List(int size){
+        Array = *new T[size];
     }
 };
 
 int main(){
     auto fn = OperateVal(2);
-    std::cout << fn(5)[2];
+    std::cout << fn(5)[0];
     return 0;
 }
