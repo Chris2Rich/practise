@@ -1,46 +1,65 @@
 #include <iostream>
-
-class OperateVal{
-private:
-    float val;
-    struct ReturnVal{
-        float vals[4];
-        ReturnVal(float inpa, float inpb, float inpc, float inpd){
-            vals[0] = inpa;
-            vals[1] = inpb;
-            vals[2] = inpc;
-            vals[3] = inpd;
-        }
-            
-        float operator[](int i){
-            return (i < 4) ? vals[i] : 0;
-        }
-        
-        
-    };
-public:
-
-    OperateVal(float inp){
-        val = inp;
-    }
-
-    ReturnVal operator()(float inp){
-        ReturnVal ans(inp+val, inp-val, inp*val, inp/val);
-        return ans;
-    }
-};
-
+template <typename T>
 class List{
-    template <typename T>
-    T Array[];
-    template <typename T>
-    List(int size){
-        Array = *new T[size];
+private:
+    T* Array;
+    int size;
+
+public:
+    List(int inpsize){
+        Array = new T[inpsize];
+        size = inpsize;
+    }
+
+    T operator[](int i){
+        return Array[i];
+    }
+
+    void fill(T Val){
+        for(int i = 0;  i < size; i++){
+            Array[i] = Val;
+        }
+    }
+
+    void randfill(){
+        for(int i = 0;  i < size; i++){
+            Array[i] = rand();
+        }
+    }
+
+    void map(T(func)(T)){
+        for(int i = 0; i < size; i++){
+            Array[i] = func(Array[i]);
+        }
+    }
+
+    void print(){
+        for(int i = 0; i < size; i++){
+            std::cout << Array[i] << " ";
+        }
     }
 };
 
-int main(){
-    auto fn = OperateVal(2);
-    std::cout << fn(5)[0];
+struct{
+    static int EvenFilter(int inp){
+        return inp * (inp % 2 == 0);
+    }
+
+    static int OddFilter(int inp){
+        return inp * (inp % 2 != 0);
+    }
+} Filters;
+
+int main(int argc, char* argv[]){
+
+    time_t now = time(&now);
+    srand(now);
+
+    auto fn = 1;
+    List<int> ElementList(5);
+    ElementList.randfill();
+    ElementList.map(Filters.EvenFilter);
+
+    ElementList.print();
     return 0;
 }
