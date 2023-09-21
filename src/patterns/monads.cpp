@@ -12,8 +12,8 @@ public:
         size = inpsize;
     }
 
-    T operator[](int i){
-        return Array[i];
+    T* operator[](int i){
+        return &Array[i];
     }
     
     void resize(int inpsize){
@@ -37,6 +37,26 @@ public:
             Array[i] = rand();
         }
     }
+    
+    void append(T inp){
+        this->resize(size+1);
+        Array[size-1] = inp;
+    }
+    
+    T popback(){
+        T ans = Array[size-1];
+        this->resize(size-1);
+        return ans;
+    }
+    
+    T popfront(){
+        T ans = Array[0];
+        for(int i = 0; i < size-1; i++){
+            Array[i] = Array[i+1];
+        }
+        this->resize(size-1);
+        return ans;
+    }
 
     void map(T(func)(T)){
         for(int i = 0; i < size; i++){
@@ -59,11 +79,12 @@ struct{
     static int OddFilter(int inp){
         return inp * (inp % 2 != 0);
     }
+    
 } Filters;
 
 struct{
-    static float Halve(float inp){
-        return inp/2.0;
+    static int Halve(int inp){
+        return inp/2;
     }
 } Functions;
 
@@ -73,11 +94,12 @@ int main(int argc, char* argv[]){
     srand(now);
 
     auto fn = 1;
-    List<float> ElementList(5);
+    List<int> ElementList(5);
     ElementList.randfill();
     ElementList.map(Functions.Halve);
     ElementList.resize(8);
+    ElementList.append(3);
 
-    ElementList.print();
+    std::cout << ElementList.popback();
     return 0;
 }
