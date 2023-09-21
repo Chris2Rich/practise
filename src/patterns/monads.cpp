@@ -57,6 +57,18 @@ public:
         this->resize(size-1);
         return ans;
     }
+    
+    bool searchlinear(T val){
+        for(int i = 0; i < size; i++){
+            if(Array[i] == val){
+                return true;
+            }
+            if(Array[size-1-i] == val){
+                return true;
+            }
+        }
+        return false;
+    }
 
     void map(T(func)(T)){
         for(int i = 0; i < size; i++){
@@ -94,12 +106,10 @@ int main(int argc, char* argv[]){
     srand(now);
 
     auto fn = 1;
-    List<int> ElementList(5);
+    List<int> ElementList(10);
     ElementList.randfill();
-    ElementList.map(Functions.Halve);
-    ElementList.resize(8);
-    ElementList.append(3);
-
-    std::cout << ElementList.popback();
+    ElementList.append(6);
+    
+    std::cout << ElementList.searchlinear(69);
     return 0;
 }
