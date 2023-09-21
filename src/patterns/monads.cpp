@@ -95,21 +95,28 @@ struct{
 } Filters;
 
 struct{
-    static int Halve(int inp){
-        return inp/2;
-    }
+    
 } Functions;
+
+struct Pixel{
+    int r = 0;
+    int b = 0;
+    int g = 0;
+    
+    Pixel operator+(Pixel inp){
+        this->r += inp.r;
+        this->b += inp.b;
+        this->g += inp.g;
+        return *this;
+    }
+};
 
 int main(int argc, char* argv[]){
 
     time_t now = time(&now);
     srand(now);
 
-    auto fn = 1;
-    List<int> ElementList(10);
+    List<Pixel> ElementList(10);
     ElementList.randfill();
-    ElementList.append(6);
-    
-    std::cout << ElementList.searchlinear(69);
     return 0;
 }
