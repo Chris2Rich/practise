@@ -11,10 +11,6 @@ public:
         Array = new T[inpsize];
         size = inpsize;
     }
-
-    T* operator[](int i){
-        return &Array[i];
-    }
     
     void resize(int inpsize){
         T* Temp = new T[inpsize];
@@ -29,12 +25,6 @@ public:
     void fill(T Val){
         for(int i = 0;  i < size; i++){
             Array[i] = Val;
-        }
-    }
-
-    void randfill(){
-        for(int i = 0;  i < size; i++){
-            Array[i] = rand();
         }
     }
     
@@ -81,6 +71,85 @@ public:
             std::cout << Array[i] << " ";
         }
     }
+    
+    T* operator[](int i){
+        return &Array[i];
+    }
+    
+    void operator+=(List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] += inp->Array[i];
+        }
+    }
+    
+    void operator-=(List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] -= inp->Array[i];
+        }
+    }
+    
+    void operator*=(List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] *= inp->Array[i];
+        }
+    }
+    
+    void operator/=(List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] /= inp->Array[i];
+        }
+    }
+    
+    void operator%=(List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] %= inp->Array[i];
+        }
+    }
+    
+    bool operator>(List<T>* inp){
+        for(int i = 0; i < std::min(size, inp->size); i++){
+            if(Array[i] > inp->Array[i]){
+                return true;
+            }
+        }
+        if(size > inp->size){
+            return true;
+        }
+        return false;
+    }
+    
+    bool operator<(List<T>* inp){
+        for(int i = 0; i < std::min(size, inp->size); i++){
+            if(Array[i] < inp->Array[i]){
+                return true;
+            }
+        }
+        if(size < inp->size){
+            return true;
+        }
+        return false;
+    }
+    
 };
 
 struct{
@@ -98,25 +167,8 @@ struct{
     
 } Functions;
 
-struct Pixel{
-    int r = 0;
-    int b = 0;
-    int g = 0;
-    
-    Pixel operator+(Pixel inp){
-        this->r += inp.r;
-        this->b += inp.b;
-        this->g += inp.g;
-        return *this;
-    }
-};
-
 int main(int argc, char* argv[]){
-
     time_t now = time(&now);
     srand(now);
-
-    List<Pixel> ElementList(10);
-    ElementList.randfill();
     return 0;
 }
