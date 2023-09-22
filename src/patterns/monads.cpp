@@ -76,7 +76,7 @@ public:
         return &Array[i];
     }
     
-    void operator+=(List<T>* inp){
+    void operator+=(const List<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -86,7 +86,7 @@ public:
         }
     }
     
-    void operator-=(List<T>* inp){
+    void operator-=(const List<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -96,7 +96,7 @@ public:
         }
     }
     
-    void operator*=(List<T>* inp){
+    void operator*=(const List<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -106,7 +106,7 @@ public:
         }
     }
     
-    void operator/=(List<T>* inp){
+    void operator/=(const List<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -116,7 +116,7 @@ public:
         }
     }
     
-    void operator%=(List<T>* inp){
+    void operator%=(const List<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -126,7 +126,7 @@ public:
         }
     }
     
-    bool operator>(List<T>* inp){
+    bool operator>(const List<T>* inp){
         for(int i = 0; i < std::min(size, inp->size); i++){
             if(Array[i] > inp->Array[i]){
                 return true;
@@ -138,7 +138,7 @@ public:
         return false;
     }
     
-    bool operator<(List<T>* inp){
+    bool operator<(const List<T>* inp){
         for(int i = 0; i < std::min(size, inp->size); i++){
             if(Array[i] < inp->Array[i]){
                 return true;
