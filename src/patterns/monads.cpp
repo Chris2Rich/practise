@@ -238,19 +238,14 @@ struct{
 
 struct{
     static int xy(int inp, int index){
-        return pow(inp * index, 2);
+        return index;
     }
 } Functions;
 
 int main(int argc, char* argv[]){
-    time_t now = time(&now);
-    srand(now);
+    srand(time(0));
 
-    List<int> List1(1000,1);
-    List<int> List2(1000,0);
-
-    List1+=&List2;
-    List1.map(Functions.xy);
-    List1.print();
+    List<int> Test(1410065408,1);
+    Test.map(Functions.xy);
     return 0;
 }
