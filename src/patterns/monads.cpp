@@ -1,4 +1,5 @@
 #include <iostream>
+#include<math.h>
 
 template <typename T>
 class List{
@@ -7,11 +8,11 @@ private:
     int size;
 
 public:
-    List(int inpsize){
-        Array = new T[inpsize];
-        size = inpsize;
-    }
     
+    int getsize(){
+        return size;
+    }
+
     void resize(int inpsize){
         T* Temp = new T[inpsize];
         for(int i = 0; i < std::min(size,inpsize); i++){
@@ -66,10 +67,27 @@ public:
         }
     }
 
+    void map(T(func)(T,int)){
+        for(int i = 0; i < size; i++){
+            Array[i] = func(Array[i],i);
+        }
+    }
+
     void print(){
         for(int i = 0; i < size; i++){
             std::cout << Array[i] << " ";
         }
+    }
+
+    List(int inpsize){
+        Array = new T[inpsize];
+        size = inpsize;
+    }
+
+    List(int inpsize, T fillval){
+        Array = new T[inpsize];
+        size = inpsize;
+        this->fill(fillval);
     }
     
     T* operator[](int i){
@@ -134,7 +152,7 @@ public:
         for(int i = 0; i < size; i++){
             Array[i] += inp->Array[i];
         }
-        return this*
+        return this;
     }
 
     List<T>* operator-(const List<T>* inp){
@@ -145,7 +163,7 @@ public:
         for(int i = 0; i < size; i++){
             Array[i] -= inp->Array[i];
         }
-        return this*
+        return this;
     }
 
     List<T>* operator*(const List<T>* inp){
@@ -156,7 +174,7 @@ public:
         for(int i = 0; i < size; i++){
             Array[i] *= inp->Array[i];
         }
-        return this*
+        return this;
     }
 
     List<T>* operator/(const List<T>* inp){
@@ -167,7 +185,7 @@ public:
         for(int i = 0; i < size; i++){
             Array[i] /= inp->Array[i];
         }
-        return this*
+        return this;
     }
 
     List<T>* operator%(const List<T>* inp){
@@ -178,7 +196,7 @@ public:
         for(int i = 0; i < size; i++){
             Array[i] %= inp->Array[i];
         }
-        return this*
+        return this;
     }
     
     bool operator>(const List<T>* inp){
@@ -219,11 +237,20 @@ struct{
 } Filters;
 
 struct{
-    
+    static int xy(int inp, int index){
+        return pow(inp * index, 2);
+    }
 } Functions;
 
 int main(int argc, char* argv[]){
     time_t now = time(&now);
     srand(now);
+
+    List<int> List1(1000,1);
+    List<int> List2(1000,0);
+
+    List1+=&List2;
+    List1.map(Functions.xy);
+    List1.print();
     return 0;
 }
