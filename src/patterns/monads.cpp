@@ -125,6 +125,61 @@ public:
             Array[i] %= inp->Array[i];
         }
     }
+
+    List<T>* operator+(const List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] += inp->Array[i];
+        }
+        return this*
+    }
+
+    List<T>* operator-(const List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] -= inp->Array[i];
+        }
+        return this*
+    }
+
+    List<T>* operator*(const List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] *= inp->Array[i];
+        }
+        return this*
+    }
+
+    List<T>* operator/(const List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] /= inp->Array[i];
+        }
+        return this*
+    }
+
+    List<T>* operator%(const List<T>* inp){
+        if(inp->size > size){
+            this->resize(inp->size);
+        }
+        
+        for(int i = 0; i < size; i++){
+            Array[i] %= inp->Array[i];
+        }
+        return this*
+    }
     
     bool operator>(const List<T>* inp){
         for(int i = 0; i < std::min(size, inp->size); i++){
