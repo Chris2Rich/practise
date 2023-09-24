@@ -29,9 +29,9 @@ public:
         }
     }
     
-    void append(T inp){
+    void append(T* inp){
         this->resize(size+1);
-        Array[size-1] = inp;
+        Array[size-1] = *inp;
     }
     
     T popback(){
@@ -49,7 +49,7 @@ public:
         return ans;
     }
     
-    bool searchlinear(T val){
+    bool searchlinear(const T val){
         for(int i = 0; i < size; i++){
             if(Array[i] == val){
                 return true;
@@ -73,24 +73,39 @@ public:
         }
     }
 
+    List<List<T>> map(List<T>(func)(T)){
+        List<List<T>> ans(size);
+        for(int i = 0; i < size; i++){
+            *ans[i] = func(Array[i]);
+        }
+        return ans;
+    }
+
+    List<List<T>> map(List<T>(func)(T,int)){
+        List<List<T>> ans(size);
+        for(int i = 0; i < size; i++){
+            *ans[i] = func(Array[i],i);
+        }
+        return ans;
+    }
+
+    T flatten(){
+        List<type(Array[0])> ans();
+        for(int i = 0; i < size; i++){
+            for(int j = 0; j < Array[0].getsize(); j++){
+                ans.append(Array[i].operator[](j));
+            }
+        }
+        return ans;
+    }
+
     void print(){
         for(int i = 0; i < size; i++){
             std::cout << Array[i] << " ";
         }
     }
-
-    List(int inpsize){
-        Array = new T[inpsize];
-        size = inpsize;
-    }
-
-    List(int inpsize, T fillval){
-        Array = new T[inpsize];
-        size = inpsize;
-        this->fill(fillval);
-    }
     
-    T* operator[](int i){
+    T* operator[](const int i){
         return &Array[i];
     }
     
@@ -222,30 +237,54 @@ public:
         }
         return false;
     }
+
+    void* operator new(size_t inpsize){
+        void* ptr = malloc(inpsize);
+        return ptr;
+    }
+
+    void operator delete(void* ptr){
+        free(ptr);
+    }
+
+    List(size_t inpsize){
+        Array = new T[inpsize];
+        size = inpsize;
+    }
+
+    List(size_t inpsize, const T fillval){
+        Array = new T[inpsize];
+        size = inpsize;
+        this->fill(fillval);
+    }
     
 };
 
 struct{
     static int EvenFilter(int inp){
-        return inp * (inp % 2 == 0);
+        return (inp % 2 == 0) * inp;
     }
 
     static int OddFilter(int inp){
-        return inp * (inp % 2 != 0);
+        return (inp % 2 != 0) * inp;
     }
-    
 } Filters;
 
 struct{
     static int xy(int inp, int index){
         return index;
     }
+    static List<int> Repeat(int inp, int index){
+        List<int> ans(index,inp);
+        return ans;
+    }
 } Functions;
 
 int main(int argc, char* argv[]){
     srand(time(0));
-
-    List<int> Test(1410065408,1);
+    List<int> Test(10);
     Test.map(Functions.xy);
+    auto Result = Test.map(Functions.Repeat);
+    Test = Result.flatten();
     return 0;
 }
