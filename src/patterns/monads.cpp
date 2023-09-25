@@ -76,7 +76,8 @@ public:
     List<List<T>> map(List<T>(func)(T)){
         List<List<T>> ans(size);
         for(int i = 0; i < size; i++){
-            *ans[i] = func(Array[i]);
+            List<T> funcval = func(Array[i])
+            ans = &funcval;
         }
         return ans;
     }
@@ -84,7 +85,8 @@ public:
     List<List<T>> map(List<T>(func)(T,int)){
         List<List<T>> ans(size);
         for(int i = 0; i < size; i++){
-            *ans[i] = func(Array[i],i);
+            List<T> funcval = func(Array[i],i)
+            ans = &funcval;
         }
         return ans;
     }
