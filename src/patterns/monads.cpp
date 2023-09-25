@@ -90,7 +90,7 @@ public:
     }
 
     T flatten(){
-        List<type(Array[0])> ans();
+        T ans(0);
         for(int i = 0; i < size; i++){
             for(int j = 0; j < Array[0].getsize(); j++){
                 ans.append(Array[i].operator[](j));
@@ -247,16 +247,16 @@ public:
         free(ptr);
     }
 
-    List(size_t inpsize){
-        Array = new T[inpsize];
-        size = inpsize;
-    }
+    List<T>(size_t inpsize) : 
+        Array(new T[inpsize]);
+        size(inpsize);
+    {}
 
-    List(size_t inpsize, const T fillval){
-        Array = new T[inpsize];
-        size = inpsize;
+    List<T>(size_t inpsize, const T fillval) : 
+        Array(new T[inpsize]);
+        size(inpsize);
         this->fill(fillval);
-    }
+    {}
     
 };
 
