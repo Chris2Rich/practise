@@ -76,8 +76,7 @@ public:
     MArray<MArray<T>> map(MArray<T>(func)(T)){
         MArray<MArray<T>> ans = *new MArray<MArray<T>>(size);
         for(int i = 0; i < size; i++){
-            MArray<T> funcval = func(Array[i]);
-            ans.append(&funcval);
+            *ans[i] = func(Array[i]);
         }
         return ans;
     }
@@ -85,8 +84,7 @@ public:
     MArray<MArray<T>> map(MArray<T>(func)(T,int)){
         MArray<MArray<T>> ans = *new MArray<MArray<T>>(size);
         for(int i = 0; i < size; i++){
-            MArray<T> funcval = func(Array[i],i);
-            ans.append(&funcval);
+            *ans[i] = func(Array[i],i);
         }
         return ans;
     }
@@ -94,7 +92,7 @@ public:
     T flatten(){
         T ans(0);
         for(int i = 0; i < size; i++){
-            for(int j = 0; j < Array[0].getsize(); j++){
+            for(int j = 0; j < Array[i].getsize(); j++){
                 ans.append(Array[i].operator[](j));
             }
         }
@@ -281,7 +279,7 @@ struct{
     static int xy(int inp, int index){
         return index;
     }
-    static MArray<int> Repeat(int inp, int index){
+    static MArray<int> RepeatIndex(int inp, int index){
         MArray<int> ans(index,inp);
         return ans;
     }
@@ -291,7 +289,7 @@ int main(int argc, char* argv[]){
     srand(time(0));
     MArray<int> Test(3);
     Test.map(Functions.xy);
-    auto Result = Test.map(Functions.Repeat);
-    Test = Result.flatten();
+    Test = Test.map(Functions.RepeatIndex).flatten();
+    Test.print();
     return 0;
 }
