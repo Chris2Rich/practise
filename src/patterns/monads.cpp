@@ -74,19 +74,19 @@ public:
     }
 
     List<List<T>> map(List<T>(func)(T)){
-        List<List<T>> ans(size);
+        List<List<T>> ans = new List<List<T>>(size);
         for(int i = 0; i < size; i++){
-            List<T> funcval = func(Array[i])
-            ans = &funcval;
+            List<T> funcval = func(Array[i]);
+            ans.append(&funcval);
         }
         return ans;
     }
 
     List<List<T>> map(List<T>(func)(T,int)){
-        List<List<T>> ans(size);
+        List<List<T>> ans = new List<List<T>>(size);
         for(int i = 0; i < size; i++){
-            List<T> funcval = func(Array[i],i)
-            ans = &funcval;
+            List<T> funcval = func(Array[i],i);
+            ans.append(&funcval);
         }
         return ans;
     }
@@ -249,16 +249,16 @@ public:
         free(ptr);
     }
 
-    List<T>(size_t inpsize) : 
-        Array(new T[inpsize]);
-        size(inpsize);
-    {}
+    List<T>(size_t inpsize){
+        Array = new T[inpsize];
+        size = inpsize;
+    }
 
-    List<T>(size_t inpsize, const T fillval) : 
-        Array(new T[inpsize]);
-        size(inpsize);
+    List<T>(size_t inpsize, const T fillval){
+        Array = new T[inpsize];
+        size = inpsize;
         this->fill(fillval);
-    {}
+    }
     
 };
 
