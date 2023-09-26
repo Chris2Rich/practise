@@ -74,7 +74,7 @@ public:
     }
 
     MArray<MArray<T>> map(MArray<T>(func)(T)){
-        MArray<MArray<T>> ans = new MArray<MArray<T>>(size);
+        MArray<MArray<T>> ans = *new MArray<MArray<T>>(size);
         for(int i = 0; i < size; i++){
             MArray<T> funcval = func(Array[i]);
             ans.append(&funcval);
@@ -83,7 +83,7 @@ public:
     }
 
     MArray<MArray<T>> map(MArray<T>(func)(T,int)){
-        MArray<MArray<T>> ans = new MArray<MArray<T>>(size);
+        MArray<MArray<T>> ans = *new MArray<MArray<T>>(size);
         for(int i = 0; i < size; i++){
             MArray<T> funcval = func(Array[i],i);
             ans.append(&funcval);
@@ -249,6 +249,11 @@ public:
         free(ptr);
     }
 
+    MArray<T>(){
+        Array = new T[0];
+        size = 0;
+    }
+
     MArray<T>(size_t inpsize){
         Array = new T[inpsize];
         size = inpsize;
@@ -284,7 +289,7 @@ struct{
 
 int main(int argc, char* argv[]){
     srand(time(0));
-    MArray<int> Test(10);
+    MArray<int> Test(3);
     Test.map(Functions.xy);
     auto Result = Test.map(Functions.Repeat);
     Test = Result.flatten();
