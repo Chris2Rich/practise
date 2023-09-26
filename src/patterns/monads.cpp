@@ -2,7 +2,7 @@
 #include<math.h>
 
 template <typename T>
-class List{
+class MArray{
 private:
     T* Array;
     int size;
@@ -73,19 +73,19 @@ public:
         }
     }
 
-    List<List<T>> map(List<T>(func)(T)){
-        List<List<T>> ans = new List<List<T>>(size);
+    MArray<MArray<T>> map(MArray<T>(func)(T)){
+        MArray<MArray<T>> ans = new MArray<MArray<T>>(size);
         for(int i = 0; i < size; i++){
-            List<T> funcval = func(Array[i]);
+            MArray<T> funcval = func(Array[i]);
             ans.append(&funcval);
         }
         return ans;
     }
 
-    List<List<T>> map(List<T>(func)(T,int)){
-        List<List<T>> ans = new List<List<T>>(size);
+    MArray<MArray<T>> map(MArray<T>(func)(T,int)){
+        MArray<MArray<T>> ans = new MArray<MArray<T>>(size);
         for(int i = 0; i < size; i++){
-            List<T> funcval = func(Array[i],i);
+            MArray<T> funcval = func(Array[i],i);
             ans.append(&funcval);
         }
         return ans;
@@ -111,7 +111,7 @@ public:
         return &Array[i];
     }
     
-    void operator+=(const List<T>* inp){
+    void operator+=(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -121,7 +121,7 @@ public:
         }
     }
     
-    void operator-=(const List<T>* inp){
+    void operator-=(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -131,7 +131,7 @@ public:
         }
     }
     
-    void operator*=(const List<T>* inp){
+    void operator*=(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -141,7 +141,7 @@ public:
         }
     }
     
-    void operator/=(const List<T>* inp){
+    void operator/=(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -151,7 +151,7 @@ public:
         }
     }
     
-    void operator%=(const List<T>* inp){
+    void operator%=(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -161,7 +161,7 @@ public:
         }
     }
 
-    List<T>* operator+(const List<T>* inp){
+    MArray<T>* operator+(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -172,7 +172,7 @@ public:
         return this;
     }
 
-    List<T>* operator-(const List<T>* inp){
+    MArray<T>* operator-(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -183,7 +183,7 @@ public:
         return this;
     }
 
-    List<T>* operator*(const List<T>* inp){
+    MArray<T>* operator*(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -194,7 +194,7 @@ public:
         return this;
     }
 
-    List<T>* operator/(const List<T>* inp){
+    MArray<T>* operator/(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -205,7 +205,7 @@ public:
         return this;
     }
 
-    List<T>* operator%(const List<T>* inp){
+    MArray<T>* operator%(const MArray<T>* inp){
         if(inp->size > size){
             this->resize(inp->size);
         }
@@ -216,7 +216,7 @@ public:
         return this;
     }
     
-    bool operator>(const List<T>* inp){
+    bool operator>(const MArray<T>* inp){
         for(int i = 0; i < std::min(size, inp->size); i++){
             if(Array[i] > inp->Array[i]){
                 return true;
@@ -228,7 +228,7 @@ public:
         return false;
     }
     
-    bool operator<(const List<T>* inp){
+    bool operator<(const MArray<T>* inp){
         for(int i = 0; i < std::min(size, inp->size); i++){
             if(Array[i] < inp->Array[i]){
                 return true;
@@ -249,12 +249,12 @@ public:
         free(ptr);
     }
 
-    List<T>(size_t inpsize){
+    MArray<T>(size_t inpsize){
         Array = new T[inpsize];
         size = inpsize;
     }
 
-    List<T>(size_t inpsize, const T fillval){
+    MArray<T>(size_t inpsize, const T fillval){
         Array = new T[inpsize];
         size = inpsize;
         this->fill(fillval);
@@ -276,15 +276,15 @@ struct{
     static int xy(int inp, int index){
         return index;
     }
-    static List<int> Repeat(int inp, int index){
-        List<int> ans(index,inp);
+    static MArray<int> Repeat(int inp, int index){
+        MArray<int> ans(index,inp);
         return ans;
     }
 } Functions;
 
 int main(int argc, char* argv[]){
     srand(time(0));
-    List<int> Test(10);
+    MArray<int> Test(10);
     Test.map(Functions.xy);
     auto Result = Test.map(Functions.Repeat);
     Test = Result.flatten();
