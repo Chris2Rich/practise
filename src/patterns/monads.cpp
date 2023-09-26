@@ -277,10 +277,10 @@ struct{
 
 struct{
     static int xy(int inp, int index){
-        return index;
+        return index+1;
     }
     static MArray<int> RepeatIndex(int inp, int index){
-        MArray<int> ans(index,inp);
+        MArray<int> ans(index+1,inp);
         return ans;
     }
 } Functions;
