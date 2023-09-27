@@ -4,6 +4,7 @@
 template <typename T>
 class MArray{
 private:
+
     T* Array;
     int size;
 
@@ -285,11 +286,34 @@ struct{
     }
 } Functions;
 
+template <typename T>
+class Addx{
+private: 
+
+    T x = T();
+    
+public:
+    
+    T* Getx(){
+        return &x;    
+    }
+    
+    Addx(T inp){
+        x = inp;
+    }
+    
+    void Add(T inp){
+        inp += x;
+    }
+};
+
 int main(int argc, char* argv[]){
     srand(time(0));
+    
     MArray<int> Test(3);
     Test.map(Functions.xy);
-    Test = Test.map(Functions.RepeatIndex).flatten();
-    Test.print();
+    
+    Addx<int> AddThree(3);
+    
     return 0;
 }
