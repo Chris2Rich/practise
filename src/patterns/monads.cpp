@@ -62,6 +62,10 @@ public:
         return false;
     }
 
+    void Sort(){
+        
+    }
+
     void map(T(func)(T)){
         for(int i = 0; i < size; i++){
             Array[i] = func(Array[i]);
@@ -286,41 +290,10 @@ struct{
     }
 } Functions;
 
-template <typename T>
-class Addx{
-private: 
-
-    T x = T();
-    
-public:
-    
-    Addx(T inp){
-        x = inp;
-    }
-    
-    T* Getx(){
-        return &x;    
-    }
-    
-    T Add(T* inp){
-        T ans = *inp + x;
-        return ans;
-    }
-    
-    T (Addx<T>)(T*) (GetFunc())(){
-        return Add;
-    }
-    
-};
-
 int main(int argc, char* argv[]){
     srand(time(0));
     
     MArray<int> Test(3);
     Test.map(Functions.xy);
-    
-    Addx<int> AddThree(3);
-    auto func = AddThree.GetFunc();
-    
     return 0;
 }
