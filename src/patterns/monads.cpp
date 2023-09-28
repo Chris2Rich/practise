@@ -294,17 +294,23 @@ private:
     
 public:
     
-    T* Getx(){
-        return &x;    
-    }
-    
     Addx(T inp){
         x = inp;
     }
     
-    void Add(T inp){
-        inp += x;
+    T* Getx(){
+        return &x;    
     }
+    
+    T Add(T* inp){
+        T ans = *inp + x;
+        return ans;
+    }
+    
+    T (Addx<T>)(T*) (GetFunc())(){
+        return Add;
+    }
+    
 };
 
 int main(int argc, char* argv[]){
@@ -314,6 +320,7 @@ int main(int argc, char* argv[]){
     Test.map(Functions.xy);
     
     Addx<int> AddThree(3);
+    auto func = AddThree.GetFunc();
     
     return 0;
 }
