@@ -1,21 +1,18 @@
 #include "MArray.h"
 
 struct Node{};
-struct TreeNode{};
 struct ListNode{};
 
 struct Edge{};
 struct Graph{};
 struct Tree{};
 struct List{};
+
 struct Node{
     MArray<Edge> EdgeArray();
     double Value = 0;
 };
 
-struct TreeNode{
-
-};
 struct ListNode{
     ListNode* Previous;
     ListNode* Next;
@@ -34,4 +31,9 @@ struct Graph{
 
 struct Tree{
 
+};
+
+struct List{
+    ListNode* Start;
+    size_t Length;
 };
