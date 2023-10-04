@@ -1,10 +1,10 @@
 #include "MArray.h"
 
-struct Node{};
-struct Edge{};
+struct Node;
+struct Edge;
 
 struct Node{
-    MArray<Edge> EdgeArray();
+    MArray<Edge> EdgeArray;
     double Value = 0;
 
     Node(){};
