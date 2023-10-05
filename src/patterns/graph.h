@@ -46,6 +46,10 @@ struct Edge{
 struct Graph{
     MArray<Node> NodeArray();
     int Size;
+
+    void AddNode(double inp1){
+        
+    }
 };
 
 struct Tree{
