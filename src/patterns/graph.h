@@ -71,12 +71,29 @@ struct ListNode{
 };
 
 struct Graph{
-    MArray<Node> NodeArray();
-    int Size;
+    MArray<Node> NodeArray;
 
-    void AddNode(double inp1){
-        
+    Node* Find(double inp){
+        for(int i = 0; i < NodeArray.getsize(); i++){
+            if(NodeArray[i]->Value == inp){
+                return NodeArray[i];
+            }
+        }
+        return nullptr;
     }
+
+    void Connect(Node* A, Node* B){
+        Edge Connector = *new Edge(A,B);
+        A->EdgeArray.append(&Connector);
+        B->EdgeArray.append(&Connector);
+    }
+
+    void Connect(Node* A, Node* B, double val){
+        Edge Connector = *new Edge(A,B, val);
+        A->EdgeArray.append(&Connector);
+        B->EdgeArray.append(&Connector);
+    }
+
 };
 
 struct Tree{
