@@ -1,33 +1,24 @@
 #include "patterns\graph.h"
 
 int main(){
-    Node A;
-    Node B;
-    Node C;
-    Node D;
-    Node E;
 
-    Edge AB(&A,&B);
-    Edge AC(&A,&B);
-    Edge AD(&A,&D);
-    Edge BD(&B,&D);
-    Edge BE(&B,&E);
-    Edge CE(&C,&E);
-    Edge DE(&D,&E);
+    Graph TestGraph;
+    MArray<Node> Nodes = TestGraph.NodeArray;
+    for(int i = 0; i < 5; i++){
+        Nodes.append(new Node);
+    }
 
-    A.EdgeArray.append(&AB);
-    B.EdgeArray.append(&AB);
-    A.EdgeArray.append(&AC);
-    C.EdgeArray.append(&AC);
-    A.EdgeArray.append(&AD);
-    D.EdgeArray.append(&AD);
-    B.EdgeArray.append(&BD);
-    D.EdgeArray.append(&BD);
-    B.EdgeArray.append(&BE);
-    E.EdgeArray.append(&BE);
-    C.EdgeArray.append(&CE);
-    E.EdgeArray.append(&CE);
-    D.EdgeArray.append(&DE);
-    E.EdgeArray.append(&DE);
+    TestGraph.Connect(Nodes[0], Nodes[1]);
+    TestGraph.Connect(Nodes[0], Nodes[2]);
+    TestGraph.Connect(Nodes[0], Nodes[3]);
+    TestGraph.Connect(Nodes[1], Nodes[2]);
+    TestGraph.Connect(Nodes[1], Nodes[4]);
+    TestGraph.Connect(Nodes[2], Nodes[3]);
+    TestGraph.Connect(Nodes[2], Nodes[4]);
+    TestGraph.Connect(Nodes[3], Nodes[4]);
+
+    Edge* MaxEdge = Nodes[0]->Min();
+    std::cout << MaxEdge->Weight;
+
     return 0;
 }
