@@ -37,7 +37,7 @@ struct Node{
         Value = inp;
     }
 
-    Edge* Max(){
+    Edge* MaxEdge(){
         double max = -__DBL_MAX__;
         Edge* ref = nullptr;
         for(int i = 0; i < EdgeArray.getsize(); i++){
@@ -50,7 +50,7 @@ struct Node{
         return ref;
     }
 
-    Edge* Min(){
+    Edge* MinEdge(){
         double max = __DBL_MAX__;
         Edge* ref = nullptr;
         for(int i = 0; i < EdgeArray.getsize(); i++){
@@ -92,6 +92,12 @@ struct Graph{
         Edge Connector = *new Edge(A,B, val);
         A->EdgeArray.append(&Connector);
         B->EdgeArray.append(&Connector);
+    }
+
+    void Print(){
+        for(int i = 0; i < NodeArray.getsize(); i++){
+            
+        }
     }
 
 };

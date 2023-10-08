@@ -2,23 +2,29 @@
 
 int main(){
 
+    int testsize = 3;
+
+    time_t now = time(&now);
+    srand(now);
+    clock_t start, end;
+    start = clock();
+    std::ios_base::sync_with_stdio(false);
+
     Graph TestGraph;
-    MArray<Node> Nodes = TestGraph.NodeArray;
-    for(int i = 0; i < 5; i++){
-        Nodes.append(new Node);
+    TestGraph.NodeArray.append(new Node(rand()));
+
+    for(int i = 1; i < testsize; i++){
+        TestGraph.NodeArray.append(new Node(rand()));
+        TestGraph.Connect(TestGraph.NodeArray[std::min(testsize-1,rand())], TestGraph.NodeArray[std::min(testsize-1,rand())], rand());
     }
 
-    TestGraph.Connect(Nodes[0], Nodes[1]);
-    TestGraph.Connect(Nodes[0], Nodes[2]);
-    TestGraph.Connect(Nodes[0], Nodes[3]);
-    TestGraph.Connect(Nodes[1], Nodes[2]);
-    TestGraph.Connect(Nodes[1], Nodes[4]);
-    TestGraph.Connect(Nodes[2], Nodes[3]);
-    TestGraph.Connect(Nodes[2], Nodes[4]);
-    TestGraph.Connect(Nodes[3], Nodes[4]);
+    auto Ans = TestGraph.NodeArray[0]->MaxEdge()->Weight;;
 
-    Edge* MaxEdge = Nodes[0]->Min();
-    std::cout << MaxEdge->Weight;
+    end = clock();
+
+    float total_time = float(end-start) / float(CLOCKS_PER_SEC);
+    std::cout << "Time taken for function : " << total_time << " secs\n";
+    std::cout << Ans;
 
     return 0;
 }
