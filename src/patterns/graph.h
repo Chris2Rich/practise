@@ -82,6 +82,15 @@ struct Graph{
         return nullptr;
     }
 
+    int FindIndex(Node* inp){
+        for(int i = 0; i < NodeArray.getsize(); i++){
+            if(NodeArray[i] == inp){
+                return i;
+            }
+        }
+        return -1;
+    }
+
     void Connect(Node* A, Node* B){
         Edge Connector = *new Edge(A,B);
         A->EdgeArray.append(&Connector);
@@ -94,9 +103,23 @@ struct Graph{
         B->EdgeArray.append(&Connector);
     }
 
+    void DConnect(Node* A, Node* B){
+        Edge Connector = *new Edge(A,B);
+        A->EdgeArray.append(&Connector);
+    }
+
+    void DConnect(Node* A, Node* B, double val){
+        Edge Connector = *new Edge(A,B, val);
+        A->EdgeArray.append(&Connector);
+    }
+
     void Print(){
-        for(int i = 0; i < NodeArray.getsize(); i++){
-            
+        for(int i = 0; i < NodeArray.getsize()-1; i++){
+            std::cout << i << " : " << NodeArray[i]->Value << " : [";
+            for(int j = 0; j < NodeArray[i]->EdgeArray.getsize()-1; j++){
+                std::cout << this->FindIndex(NodeArray[i]->EdgeArray[j]->End) << " : " << NodeArray[i]->EdgeArray[j]->End->Value << "\n";
+            }
+            std::cout << "]\n";
         }
     }
 
