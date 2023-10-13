@@ -2,7 +2,7 @@
 
 int main(){
 
-    int testsize = 5;
+    int testsize = 1000;
 
     time_t now = time(&now);
     srand(now);
@@ -20,7 +20,7 @@ int main(){
 
     end = clock();
 
-    float total_time = float(end-start) / float(CLOCKS_PER_SEC);
+    double total_time = end- start / (float)CLOCKS_PER_SEC;
     std::cout << "Elapsed Time : " << total_time << "s\n";
     TestGraph.Print();
 

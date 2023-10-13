@@ -243,6 +243,19 @@ public:
         return false;
     }
 
+    bool operator==(const MArray<T>* inp){
+        for(int i = 0; i < std::min(size, inp->size); i++){
+            if(Array[i] == inp->Array[i]){
+                return true;
+            }
+        }
+
+        if(size == inp->size){
+            return true;
+        }
+        return false;
+    }
+
     void* operator new(size_t inpsize){
         void* ptr = malloc(inpsize);
         return ptr;

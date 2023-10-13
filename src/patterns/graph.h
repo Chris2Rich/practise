@@ -25,6 +25,15 @@ struct Edge{
         End = inp2;
         Weight = inp3;
     }
+
+    bool operator==(Edge inp){
+        if(Start == inp.Start && End == inp.End && Weight == inp.Weight){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
 };
 
 struct Node{
@@ -62,6 +71,16 @@ struct Node{
 
         return ref;
     }
+
+    bool operator==(Node* inp){
+        if(EdgeArray == &inp->EdgeArray && Value == inp->Value){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+
 };
 
 struct ListNode{
@@ -84,7 +103,7 @@ struct Graph{
 
     int FindIndex(Node* inp){
         for(int i = 0; i < NodeArray.getsize(); i++){
-            if(NodeArray[i] == inp){
+            if(*NodeArray[i] == inp){
                 return i;
             }
         }
@@ -116,9 +135,9 @@ struct Graph{
     void Print(){
         for(int i = 0; i < NodeArray.getsize()-1; i++){
             std::cout << i << " : " << NodeArray[i]->Value << " : [";
-            for(int j = 0; j < NodeArray[i]->EdgeArray.getsize()-1; j++){
-                std::cout << this->FindIndex(NodeArray[i]->EdgeArray[j]->End) << " : " << NodeArray[i]->EdgeArray[j]->End->Value << "\n";
-            }
+            for(int j = 0; j <= NodeArray[i]->EdgeArray.getsize()-1; j++){
+                std::cout << this->FindIndex(NodeArray[i]->EdgeArray[j]->End) << " : " << NodeArray[i]->EdgeArray[j]->End->Value << ";";
+            }   
             std::cout << "]\n";
         }
     }
