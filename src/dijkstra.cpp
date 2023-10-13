@@ -20,7 +20,7 @@ int main(){
 
     end = clock();
 
-    double total_time = end- start / (float)CLOCKS_PER_SEC;
+    double total_time = (end - start) / (float)CLOCKS_PER_SEC;
     std::cout << "Elapsed Time : " << total_time << "s\n";
     TestGraph.Print();
 
