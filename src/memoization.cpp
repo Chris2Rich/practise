@@ -41,6 +41,25 @@ string longestsubstring(string s){
     return s.substr(maxgroup.first,maxgroup.second);
 }
 
+char modechar(string s){
+    unordered_map<char,double> memo;
+    double maxval = 0;
+    char maxchar = 0;
+    for(char c = 0; c <= 127; c++){
+        memo.insert({c,0});
+    }
+    for(int i = 0; i < s.size(); i++){
+        memo[s[i]]++;
+    }
+    for(auto x : memo){
+        if(maxval < x.second){
+            maxchar = x.first;
+        }
+        maxval = max(maxval, x.second);
+    }
+    return maxchar;
+}
+
 int main(){
 
     int testsize = 8;
@@ -51,7 +70,7 @@ int main(){
     start = clock();
     std::ios_base::sync_with_stdio(false);
 
-    auto ans = longestsubstring("AAABCDEEEEE");
+    auto ans = modechar("AAABCDEEEEE");
 
     end = clock();
 
