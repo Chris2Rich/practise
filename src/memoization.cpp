@@ -23,9 +23,9 @@ double fibonnaci(double n){
 }
 
 string longestsubstring(string s){
-    double maxval = 0;
-    pair<double,double> maxgroup;
-    for(pair<double,double> ptr = {0,1}; &s[ptr.second] < &s[s.size()];){
+    int maxval = 0;
+    pair<int,int> maxgroup;
+    for(pair<int,int> ptr = {0,1}; &s[ptr.second] < &s[s.size()];){
         if(s[ptr.first] == s[ptr.second]){
             ptr.second++;
             if(maxval < ptr.second-ptr.first){
@@ -42,11 +42,11 @@ string longestsubstring(string s){
 }
 
 char modechar(string s){
-    unordered_map<char,double> memo;
-    double maxval = 0;
+    unordered_map<char,int> memo;
+    int maxval = 0;
     char maxchar = 0;
-    for(char c = 0; c <= 127; c++){
-        memo.insert({c,0});
+    for(int c = 0; c <= 127; c++){
+        memo.insert({(char)c,0});
     }
     for(int i = 0; i < s.size(); i++){
         memo[s[i]]++;
@@ -60,6 +60,22 @@ char modechar(string s){
     return maxchar;
 }
 
+int maxsubarr(vector<int> v, int n){
+    int s = 0;
+    int e = n;
+    int maxval = INT_MIN;
+    while(e <= v.size()){
+        maxval = max(maxval, accumulate(v.begin()+s,v.begin()+e,0));
+        s++;
+        e++;
+    }
+    return maxval;
+}
+
+int maxsubseq(vector<int> v, int n){
+    int p = 0;
+}
+
 int main(){
 
     int testsize = 8;
@@ -70,7 +86,7 @@ int main(){
     start = clock();
     std::ios_base::sync_with_stdio(false);
 
-    auto ans = modechar("AAABCDEEEEE");
+    auto ans = maxsubarr({3,6,5,1,2,2,3,6,15,9},4);
 
     end = clock();
 
