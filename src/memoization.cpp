@@ -22,18 +22,23 @@ double fibonnaci(double n){
     return func.lambda(n);
 }
 
-double longestsubstring(string s){
+string longestsubstring(string s){
     double maxval = 0;
+    pair<double,double> maxgroup;
     for(pair<double,double> ptr = {0,1}; &s[ptr.second] < &s[s.size()];){
         if(s[ptr.first] == s[ptr.second]){
             ptr.second++;
+            if(maxval < ptr.second-ptr.first){
+                maxgroup.first = ptr.first;
+                maxgroup.second = ptr.second;
+            }
             maxval = max(maxval, ptr.second-ptr.first);
         }
         else{
             ptr.first++;
         }
     }
-    return maxval;
+    return s.substr(maxgroup.first,maxgroup.second);
 }
 
 int main(){
@@ -46,7 +51,7 @@ int main(){
     start = clock();
     std::ios_base::sync_with_stdio(false);
 
-    double ans = fibonnaci(testsize);
+    auto ans = longestsubstring("AAABCDEEEEE");
 
     end = clock();
 
