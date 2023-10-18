@@ -73,7 +73,15 @@ int maxsubarr(vector<int> v, int n){
 }
 
 int maxsubseq(vector<int> v, int n){
-    int p = 0;
+    vector<int> arr(n, INT_MIN);
+    
+    for(int i =0; i < v.size(); i++){
+        if(v[i] > *min_element(arr.begin(),arr.end())){
+            *min_element(arr.begin(),arr.end()) = v[i];
+        }
+    }
+    
+    return accumulate(arr.begin(),arr.end(),0);
 }
 
 int main(){
