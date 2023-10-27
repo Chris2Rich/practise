@@ -4,7 +4,10 @@ using namespace std;
 class Instruction{
     public:
     char Name = ""[0];
-    void (*Function)(void);
+    union Function{
+        template<typename T>
+        constexpr void (*)();
+    };
 };
 
 class Stack{
@@ -16,9 +19,8 @@ class Stack{
 int main(){
     Instruction Add;
     
-    Add.Function = reinterpret_cast<void (*)(void)> (*[](int x, int y){return x + y;});
-    auto f = reinterpret_cast<int (*)(int,int)> (Add.Function);
-    std::cout << f(2,3);
+    Add.Function = (*[](int x, int y){return x + y;});
+    std::cout << Add.Function(2,3);
 
     return 0;
 }
