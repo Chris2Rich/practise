@@ -15,8 +15,8 @@ class Stack{
 
 int main(){
     Instruction Add;
-    int (*a)(int,int) = [](int x, int y){return x + y;};
-    Add.Function = reinterpret_cast<void (*)(void)> (a);
+    
+    Add.Function = reinterpret_cast<void (*)(void)> (*[](int x, int y){return x + y;});
     auto f = reinterpret_cast<int (*)(int,int)> (Add.Function);
     std::cout << f(2,3);
 
