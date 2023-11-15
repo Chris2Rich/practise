@@ -1,7 +1,6 @@
 #include <math.h>
 #include <iostream>
 #include <vector>
-#include <utility>
 
 std::vector<double> LogReduce(std::vector<double>* a){
     std::vector<double> b;
@@ -12,7 +11,7 @@ std::vector<double> LogReduce(std::vector<double>* a){
     return b;
 }
 
-double Error(std::vector<std::vector<double>>* a, double (*func)(double)){
+double MSE(std::vector<std::vector<double>>* a, double (*func)(double)){
     double ans = 0;
 
     for(int i = 0; i < a->size(); i++){
@@ -28,6 +27,6 @@ double xy(double x){
 
 int main(){
     std::vector<std::vector<double>> data = {{1,2},{2,4},{3,5},{4,6},{5,7}};
-    std::cout << Error(&data, &xy);
+    std::cout << MSE(&data, &xy);
     return 0;
 }
