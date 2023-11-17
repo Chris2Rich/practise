@@ -1,13 +1,13 @@
 #include <vector>
 #include <iostream>
 
-class Graph{
+class graph{
     public:
-    std::vector<std::vector<double>> AdjacencyMatrix;
+    std::vector<std::vector<double>> adjacency_matrix;
 
-    Graph(double n){
+    graph(double n){
         for(int i = 0; i < n; i++){
-            AdjacencyMatrix.push_back(std::vector<double>(n,0));
+            adjacency_matrix.push_back(std::vector<double>(n,0));
         }
     }
 };
