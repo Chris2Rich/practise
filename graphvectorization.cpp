@@ -23,17 +23,25 @@ vector<task*> vectorizeworkload(vector<task*> graph){
     graph[0]->completed = true;
     q.push(graph[0]);
     while(!q.empty()){
-      task* v = q.front();
-      q.pop();
-      v->completed = true;
-      workload.push_back(v);
-      for(int i = 0; i < v->requirements.size(); i++){
+        task* v = q.front();
+        q.pop();
+        v->completed = true;
+        workload.push_back(v);
+        for(int i = 0; i < v->requirements.size(); i++){
         q.push(v->requirements[i]);
-      }
+        }
     }
     
     reverse(workload.begin(), workload.end());
-    return workload;
+    unordered_map<task*,int> temp;
+    vector<task*> trueworkload;
+    for(int i = 0; i < workload.size(); i++){
+        if(temp.find(workload[i]) == temp.end()){
+            temp[workload[i]] = 0;
+            trueworkload.push_back(workload[i]);
+        }
+    }
+    return trueworkload;
 }
 
 int main(){
@@ -48,14 +56,15 @@ int main(){
     task task8(8);
     task task9(9);
 
-    task1.requirements = {&task2, &task3};
-    task2.requirements = {&task4};
-    task3.requirements = {&task4, &task5};
-    task4.requirements = {&task6, &task7};
-    task5.requirements = {&task8};
-    task6.requirements = {};
-    task7.requirements = {&task9};
-    task8.requirements = {&task9};
+    task1.requirements = {&task2, &task3, &task8};
+    task2.requirements = {&task4, &task5};
+    task3.requirements = {&task5, &task6};
+    task4.requirements = {&task5, &task7};
+    task5.requirements = {&task6};
+    task6.requirements = {&task9};
+    task7.requirements = {};
+    task8.requirements = {&task2};
+    task9.requirements = {};
 
     auto workload = vectorizeworkload({&task1,&task2,&task3,&task4,&task5,&task6,&task7,&task8,&task9});
 
