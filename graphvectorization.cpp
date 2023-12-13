@@ -18,35 +18,22 @@ struct task{
 };
 
 vector<task*> vectorizeworkload(vector<task*> graph){
-    vector<task*> work(0);
-    vector<task*> nowork(0);
-    for(int i = 0; i < graph.size(); i++){
-        if(graph[i]->requirements.size() == 0){
-            nowork.push_back(graph[i]);
-        }
+    vector<task*> workload(0);
+    queue<task*> q;
+    graph[0]->completed = true;
+    q.push(graph[0]);
+    while(!q.empty()){
+      task* v = q.front();
+      q.pop();
+      v->completed = true;
+      workload.push_back(v);
+      for(int i = 0; i < v->requirements.size(); i++){
+        q.push(v->requirements[i]);
+      }
     }
-
-    int count = 5;
-
-    while(count > 0){
-        task* n = nowork[nowork.size()-1];
-        nowork.pop_back();
-        work.push_back(n);
-        for(int i = 0; i < graph.size(); i++){
-            for(int j = 0; j < graph[i]->requirements.size(); j++){
-                if(graph[i]->requirements[j] == n){
-                    graph[i]->requirements.erase(graph[i]->requirements.begin() + j);
-                }
-            }
-            if(graph[i]->requirements.size() == 0){
-                nowork.push_back(graph[i]);
-            }
-        }
-
-        count--;
-    }
-
-    return work;
+    
+    reverse(workload.begin(), workload.end());
+    return workload;
 }
 
 int main(){
