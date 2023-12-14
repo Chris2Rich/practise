@@ -4,7 +4,6 @@ using namespace std;
 struct task{
     public:
     vector<task*> requirements;
-    bool completed = false;
     int id;
 
     task(){};
@@ -20,12 +19,10 @@ struct task{
 vector<task*> vectorizeworkload(vector<task*> graph){
     vector<task*> workload(0);
     queue<task*> q;
-    graph[0]->completed = true;
     q.push(graph[0]);
     while(!q.empty()){
         task* v = q.front();
         q.pop();
-        v->completed = true;
         workload.push_back(v);
         for(int i = 0; i < v->requirements.size(); i++){
         q.push(v->requirements[i]);
