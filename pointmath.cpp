@@ -7,22 +7,31 @@
 // #define int64 short int
 // #define int32 signed char 
 
-#define s64 sizeof(int64)
-#define s32 sizeof(int32)
+#define s64 sizeof(int64) * 8
+#define s32 sizeof(int32) * 8
 
 struct point{
+    private:
+    int64 val;
 
-    inline static int64 create(int32 x, int32 y){
-        return ((x << s32) + y);
+    public:
+
+    point(){
+        val = 0;
     }
 
-    inline static int32 x(int64 val){
+    point(int32 x, int32 y){
+        val = ((x << s32) + y);
+    }
+
+    inline int32 x(){
         return (val >> s32);
     }
 
-    inline static int32 y(int64 val){
-        return val;
+    inline int32 y(){
+        return ((val << s32) >> s64);
     }
+
 };
 
 void bin(int64 x){
@@ -40,8 +49,8 @@ void bin(int32 x){
 }
 
 int main(){
-    int64 pointa = point::create(1,6);
-    bin(pointa);
-    std::cout << (int64) point::y(pointa);
+    point a(1,6);
+    
+    //std::cout << a.x();
     return 0;
 }
