@@ -11,25 +11,18 @@
 #define s32 sizeof(int32) * 8
 
 struct point{
-    private:
-    int64 val;
-
-    public:
-
-    point(){
-        val = 0;
+    inline static int64 create(int32 x, int32 y){
+        return ((x << s32) + y);
     }
 
-    point(int32 x, int32 y){
-        val = ((x << s32) + y);
+    static inline int32 x(int64 n){
+        std::cout << (n >> s32);
+        return (n >> s32);
     }
 
-    inline int32 x(){
-        return (val >> s32);
-    }
-
-    inline int32 y(){
-        return ((val << s32) >> s64);
+    static inline int32 y(int64 n){
+        std::cout << ((n << s32) >> s64);
+        return ((n << s32) >> s64);
     }
 
 };
@@ -49,8 +42,7 @@ void bin(int32 x){
 }
 
 int main(){
-    point a(1,6);
-    
-    //std::cout << a.x();
+    int64 a = point::create(1,2);
+    point::x(a);
     return 0;
 }
