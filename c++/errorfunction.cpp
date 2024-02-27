@@ -42,10 +42,6 @@ lfunc SGD(std::vector<std::vector<double>>* a, double tolerance){
     double prev = LLONG_MAX;
     double m = 0;
     double c = 0;
-
-    while(MAE(a,lambda)){
-
-    }
 }
 
 int main(){
