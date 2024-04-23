@@ -4,10 +4,10 @@ px = 1/3
 dp = []
 def prob(n):
     if n == 1:
-        return 1/px
+        return int(1/px)
     else:
         if len(dp) < n:
             dp.append(int(prob(n-1) + 1/(px ** n)))
         return dp[n-2]
         
-print(prob(5))
+print(prob(1))
