@@ -6,7 +6,8 @@ def fib(n):
 n = 0
 vals = []
 while(fib(n) < 4000000):
-    vals.append(fib(n))
+    if(fib(n) % 2 == 0):
+        vals.append(fib(n))
     n += 1
 
 print(sum(vals))
