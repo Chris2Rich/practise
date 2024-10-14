@@ -29,5 +29,22 @@ def diag_r(row, column):
     return(m[row][column] * m[row + 1][column + 1] * m[row + 2][column + 2] * m[row + 3][column + 3])
 def diag_l(row, column):
     return(m[row][column] * m[row + 1][column - 1] * m[row + 2][column - 2] * m[row + 3][column - 3])
+
 res = 0
-print(m)
+for i in range(0, 20):
+    for j in range(0, 17):
+        res = max(res, left(i, j))
+
+for i in range(0, 17):
+    for j in range(0, 20):
+        res = max(res, down(i, j))
+
+for i in range(0, 17):
+    for j in range(0, 17):
+        res = max(res, diag_r(i, j))
+
+for i in range(0, 17):
+    for j in range(3, 20):
+        res = max(res, diag_l(i, j))
+
+print(res)
