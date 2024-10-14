@@ -21,10 +21,13 @@ m = [
     [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ]
 
-def left():
-def down():
-def diag_r():
-def diag_l():
-
+def left(row, column):
+    return (m[row][column] * m[row][column + 1] * m[row][column + 2] * m[row][column + 3])
+def down(row, column):
+    return (m[row][column] * m[row + 1][column] * m[row + 2][column] * m[row + 3][column])
+def diag_r(row, column):
+    return(m[row][column] * m[row + 1][column + 1] * m[row + 2][column + 2] * m[row + 3][column + 3])
+def diag_l(row, column):
+    return(m[row][column] * m[row + 1][column - 1] * m[row + 2][column - 2] * m[row + 3][column - 3])
 res = 0
 print(m)
