@@ -7,4 +7,4 @@ while a < 500:
     n += 1
     a = factor_count(triangular(n))
 
-print(n)
+print(triangular(n))
