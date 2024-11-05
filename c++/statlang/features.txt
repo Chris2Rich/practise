@@ -1,5 +1,0 @@
-statistical language
-
-native support for arrays, matrices, real numbers, imaginary numbers
-operations such as matrix multiplication, addition, vectorization, and calculating features such as standard deviation
-also native support for ML processes such as SGD and Reinforcement Learning
