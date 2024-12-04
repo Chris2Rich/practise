@@ -2,11 +2,7 @@ file = open("./advent_of_code24/2.txt", "r")
 lines = file.readlines()
 file.close()
 
-res = []
-
-for i in lines:
-    v = i.split(" ")
-    v = [int(j) for j in v]
+def check_permutation(v):
     incr = False
     safe = True
     if v[1] - v[0] > 0:
@@ -27,6 +23,13 @@ for i in lines:
             if v[j] - v[j + 1] > 3:
                 safe = False
                 break
-    res.append(int(safe))
+    return int(safe)
+
+res = []
+
+for i in lines:
+    v = i.split(" ")
+    v = [int(j) for j in v]
+    res.append(int(sum([check_permutation(i) for i in [v[0:j] + v[j+1:] for j in range(0, len(v))]]) > 0))
 
 print(sum(res))
