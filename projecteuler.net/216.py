@@ -1,9 +1,8 @@
 #Generate list of primes
-#Create sorted list of squbes
-#filter for those with 200
-#check if prime-proof
 
-nums = [i for i in range(2, 2024)]
+n = 10 ** 4
+
+nums = [(2 * (i**2)) - 1 for i in range(2, int(pow((n + 1) / 2, 1/2)) + 1)]
 marked = set()
 
 for i in nums:
@@ -12,4 +11,4 @@ for i in nums:
             marked.add(nums[j-2])
 
 primes = [i for i in filter(None, [i if i not in marked else None for i in nums])]
-print(primes)
+print(len(primes))
