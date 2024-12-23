@@ -9,8 +9,6 @@ def solve():
         if s[i] + s[i+1] == "BA":
             p2.add(i)
 
-    print(p1, p2)
-
     if len(p1) == 0 or len(p2) == 0:
         print("NO")
         return
