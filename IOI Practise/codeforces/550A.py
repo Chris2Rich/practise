@@ -9,23 +9,11 @@ def solve():
         if s[i] + s[i+1] == "BA":
             p2.add(i)
 
-    if len(p1) == 0 or len(p2) == 0:
-        print("NO")
-        return
-
-    mat = []
     for i in p1:
-        mat.append([])
         for j in p2:
-            mat[-1].append(abs(i -j))
-
-    for i in range(0, len(mat)):
-        mat[i] = [i for i in filter(lambda x: x if x > 1 else None, mat[i])]
-
-    for i in mat:
-        if len(i) != 0:
-            print("YES")
-            return
+            if abs(i -j) > 1:
+                print("YES")
+                return
 
     print("NO")
     return
