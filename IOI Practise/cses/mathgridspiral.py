@@ -1,0 +1,1 @@
+print("".join([str(i) + "\n" for i in [(lambda x,y : (((y*y + (1 - x)) *  (not (y %2)) + (((y-1) * (y-1) + x) * (y%2))) * (y >= x)) + (((x*x + (1 - y)) *  (x %2) +(((x-1) * (x-1) + y) * (not (x%2)))) * (y < x)))(int(i[1]), int(i[0])) for i in [input().split() for i in range(int(input()))]]]))
