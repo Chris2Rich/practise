@@ -1,0 +1,1 @@
+print("Anagrams" if ({i: w.count(i) for w in [input()] for i in w} == {i: w.count(i) for w in [input()] for i in w}) else "Not anagrams")
