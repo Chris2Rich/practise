@@ -1,6 +1,4 @@
 grid = {(i+1,j+1):0 for i in range(11) for j in range(11)}
-ant1 = {"p": [1,1], "d": 1}
-ant2 = {"p": [1,1], "d": 1}
 
 #T1,l2,B3,R4
 
@@ -17,7 +15,7 @@ def move_ant(ant):
     if ant["p"][0] > 11 or ant["p"][1] > 11 or ant["p"][0] < 1 or ant["p"][1] < 1:
         return None
 
-    if grid[(ant["p"][0], ant["p"][1])]:
+    if not grid[(ant["p"][0], ant["p"][1])]:
         if ant["d"] == 1:
             ant["d"] = 2
         elif ant["d"] == 2:
@@ -44,14 +42,12 @@ def move(ant1,ant2):
         ant1 = move_ant(ant1)
     if ant2 != None:
         ant2 = move_ant(ant2)
-    if ant1 == None and ant2 == None:
-        return None
-    return 1
+    return (ant1, ant2)
 
-def print_grid():
+def print_grid(ant1, ant2):
     s = ""
-    n = list(grid)[::-1][0][0]
-    for i in list(grid)[::-1]:
+    n = sum([list(grid)[::-1][i* 11:(i+1) * 11][::-1] for i in range(0, 11)], [])[0][0]
+    for i in sum([list(grid)[::-1][i* 11:(i+1) * 11][::-1] for i in range(0, 11)], []):
         if i[0] != n:
             print(s)
             s = ""
@@ -72,12 +68,19 @@ def game():
     ant1 = {"p": [int(inp1[0]), int(inp1[1])], "d": 1 if inp1[2] == "T" else 2 if inp1[2] == "L" else 3 if inp1[2] == "B" else 4 if inp1[2] == "R" else None}
     inp2 = input().split()
     ant2 = {"p": [int(inp2[0]), int(inp2[1])], "d": 1 if inp2[2] == "T" else 2 if inp2[2] == "L" else 3 if inp2[2] == "B" else 4 if inp2[2] == "R" else None}
+    if ant1["p"][0] > 11 or ant1["p"][1] > 11 or ant1["p"][0] < 1 or ant1["p"][1] < 1:
+        ant1 = None
+    if ant2["p"][0] > 11 or ant2["p"][1] > 11 or ant2["p"][0] < 1 or ant2["p"][1] < 1:
+        ant2 = None
 
-ant1 = {"p": [2,1], "d": 1}
-ant2 = {"p": [15,15], "d": 4}
+    moves = int(input())
+    while moves != -1:
+        for i in range(0, moves):
+            if (ant1, ant2) == (None, None):
+                break
+            ant1, ant2 = move(ant1, ant2)
+        print_grid(ant1, ant2)
+        moves = int(input())
+    return
 
-print_grid()
-move(ant1,ant2)
-move(ant1,ant2)
-move(ant1,ant2)
-print_grid()
+game()
