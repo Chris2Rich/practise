@@ -7,7 +7,6 @@ for x in range(2, L):
             continue
         n2 = (x * y) / (x + y)
         if(n2 == int(n2)):
-            print(x, y, n2)
             c += 1
 
 print(c)
