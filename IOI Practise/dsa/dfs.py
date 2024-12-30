@@ -1,8 +1,8 @@
 class Node():
-    val = 0
+    val = None
     edges = []
 
-    def __init__(self, v=0, e=[]):
+    def __init__(self, v=None, e=[]):
         self.val = v
         self.edges = e
 
@@ -12,7 +12,7 @@ class Node():
 seen = {}
 pos = 0
 
-def dfs(t: int, head: Node):
+def dfs(t: any, head: Node):
     global pos
     if head in seen:
         return -1
