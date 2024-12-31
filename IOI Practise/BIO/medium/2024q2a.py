@@ -1,5 +1,5 @@
 import math
-s, v = #input().split()
+s, v = input().split()
 
 e = lambda x: int(2 * (x))
 o = lambda x: int(2 * (x) - 1)
