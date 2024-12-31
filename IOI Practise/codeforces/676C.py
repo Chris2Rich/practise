@@ -4,7 +4,7 @@ v = [1 if i == "a" else 0 for i in input()]
 # longest subarray with at most k abberations
 # max nlogn time
 
-# linear time solution
+# n^2 time solution
 def solve():
     cheat = sum(v)
     if cheat + k >= n or cheat - k <= 0:
