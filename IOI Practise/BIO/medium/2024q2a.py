@@ -3,9 +3,9 @@ s, v = input().split()
 
 e = lambda x: int(2 * (x))
 o = lambda x: int(2 * (x) - 1)
-t = lambda x: int((pow(8*(x+1) - 7, 0.5)-1)// 2 + 1)
+t = lambda x: int(math.floor(pow(2*x, 0.5) + 0.5))
 funcs = {"E": e, "O": o, "T": t}
-compose = lambda f1, f2: lambda x: f2(f1(f2(x)))
+compose = lambda f1, f2: lambda x: f2(f1(f2(x))) if type(f1) != list and type(f2) != list else f2[0](f1[0](f2[0](x))) if type(f1) == list and type(f2) == list else f2(f1[0](f2(x))) if type(f2) != list else f2[0](f1(f2[0](x)))
 
 s = list(filter(lambda x: x != [], [list(filter(lambda x: x != [], [[k for k in j] for j in i.split(")")])) for i in s.split("(")]))
 for j in s:
@@ -19,7 +19,6 @@ for j in s:
             i[0] = compose(i[0], i[1])
             del i[1]
     while len(j) != 1:
-        print(j[0])
         j[0] = compose(j[0], j[1])
         del j[1]
 
