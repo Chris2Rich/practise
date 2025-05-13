@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import sympy
 
-scale = 100
+scale = 5
 
 fig, ax = plt.subplots()
 ax.set_xlim(-scale, scale)
