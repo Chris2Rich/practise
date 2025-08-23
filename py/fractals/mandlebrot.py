@@ -1,19 +1,5 @@
 import numpy as np
-import matplotlib.pyplot as plt
-from PIL import Image
-
-def array_to_picture(arr, cmap="viridis", save_path=None):
-    height, width = arr.shape
-    dpi = 100
-    fig = plt.figure(figsize=(width / dpi, height / dpi), dpi=dpi)
-    plt.imshow(arr, cmap=cmap, extent=(0, width, 0, height))
-    plt.axis("off")
-
-    if save_path:
-        plt.savefig(save_path, bbox_inches="tight", pad_inches=0)
-    plt.show()
-    plt.close(fig)
-    return
+from renderer import array_to_picture
 
 def mandlebrot(c: complex, limit: int=5):
     z = 0 + 0j
@@ -25,6 +11,7 @@ def mandlebrot(c: complex, limit: int=5):
 
 # Example usage
 if __name__ == "__main__":
+    limit = 100
     vmandelbrot = np.vectorize(mandlebrot)
     width, height = 3840, 2160
     x = np.linspace(-2.0, 1.0, width)
@@ -32,5 +19,5 @@ if __name__ == "__main__":
     X, Y = np.meshgrid(x, y)
     C = X + (1j * Y)
 
-    mandelbrot_vals = vmandelbrot(C, limit=100)
-    array_to_picture(mandelbrot_vals, cmap="magma", save_path="./py/fractals/mandlebrot.png")
+    mandelbrot_vals = vmandelbrot(C, limit=limit)
+    array_to_picture(mandelbrot_vals, cmap="magma", save_path=f"./py/fractals/pictures/mandlebrot{limit}.png")
