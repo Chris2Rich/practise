@@ -6,7 +6,7 @@ def julia(z:complex, c: complex, limit: int=5):
         z = z**2 + c
         if abs(z) > 2:
             return (i / limit)
-    return 1
+    return 0
 
 # Example usage
 if __name__ == "__main__":
