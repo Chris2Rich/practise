@@ -5,8 +5,8 @@ class Node():
         self.right = right
 
 class Tree():
-	def __init__(self):
-		self.rootNode = self.createBalancedTree()
+    def __init__(self):
+        self.rootNode = self.createBalancedTree()
 
 def createBalancedTree(v):
     n = len(v)
@@ -37,14 +37,14 @@ def createBalancedTree(v):
 
 def binary_search(self, target, root=self.rootNode, depth=2):
     print(f"Checked {depth} Nodes")
-	if [root.left, root.right] == [None, None]:
-    	return None
-	if target in [root.left.value, root.right.value]:
-    	if target == root.left.value:
+    if [root.left, root.right] == [None, None]:
+        return None
+    if target in [root.left.value, root.right.value]:
+        if target == root.left.value:
             return root.left, root
         else:
             return root.right, root
-	if target < root.left.value:
+    if target < root.left.value:
         return binary_search(target, root.left.left, depth=depth+2)
     if target > root.right.value:
         return binary_search(target, root.right.right, depth=depth+2)
